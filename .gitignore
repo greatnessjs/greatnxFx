@@ -1,0 +1,23 @@
+# Secrets
+.env
+secrets.py
+
+# Model files (large binaries)
+models/model.pkl
+models/scaler.pkl
+
+# Output charts
+output/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Data files
+data/
+
+# IDE
+.vscode/
+.idea/

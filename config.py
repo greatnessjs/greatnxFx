@@ -1,6 +1,17 @@
 # =============================================================================
 # config.py — Central configuration for the AI Forex Trading Bot
 # =============================================================================
+import os
+from pathlib import Path
+
+# Load .env file if it exists (keeps secrets out of git)
+_env_path = Path(__file__).parent / ".env"
+if _env_path.exists():
+    for _line in _env_path.read_text().splitlines():
+        _line = _line.strip()
+        if _line and not _line.startswith("#") and "=" in _line:
+            _k, _v = _line.split("=", 1)
+            os.environ.setdefault(_k.strip(), _v.strip())
 
 # --- Symbol & Timeframe ---
 # FX Pairs : EURUSD, GBPUSD, USDJPY, AUDUSD, USDCAD, USDCHF, NZDUSD
@@ -64,5 +75,5 @@ SPREAD_PIPS       = 1.5       # simulated spread
 COMMISSION_PER_TRADE = 7.0    # set > 0 to model broker commissions
 
 # --- Telegram Alerts ---
-TELEGRAM_TOKEN   = "7652282409:AAENeSr2S3QkovRH0E2BIOD7nKd1MCIvQ8Y"          # from @BotFather  e.g. "123456:ABC-DEF..."
-TELEGRAM_CHAT_ID = "8300543038"          # your personal chat ID e.g. "987654321"
+TELEGRAM_TOKEN   = os.getenv("TELEGRAM_TOKEN",   "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
